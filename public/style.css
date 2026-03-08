@@ -1,0 +1,18 @@
+/* global styles including gradient and font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: linear-gradient(135deg, #000000 0%, #390557 100%);
+  color: #fff;
+  font-family: 'Roboto', system-ui, sans-serif;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* additional styles may remain in layout.html */

@@ -1,0 +1,50 @@
+<div class="card">
+  <h2>Upravit GPU #{{id}}</h2>
+
+  <form id="editForm" data-id="{{id}}">
+    <div class="row">
+      <label>Výrobce čipu:</label><br />
+      <select name="vendor" id="vendorSelect" required>
+        <option value="" disabled>Vyberte výrobce</option>
+        <option value="Nvidia">Nvidia</option>
+        <option value="AMD">AMD</option>
+        <option value="Intel">Intel</option>
+      </select>
+    </div>
+    <div class="row">
+      <label>Značka:</label><br />
+      <input name="brand" id="brandInput" value="{{brand}}" required />
+    </div>
+    <div class="row">
+      <label>Model:</label><br />
+      <input name="model" value="{{model}}" required />
+    </div>
+    <script>
+      // after the select is rendered set current value
+      window.addEventListener('DOMContentLoaded', () => {
+        const sel = document.getElementById('vendorSelect');
+        if (sel) sel.value = `{{vendor}}`;
+        const bi = document.getElementById('brandInput');
+        if (bi) bi.value = `{{brand}}`;
+      });
+    </script>
+    <div class="row">
+      <label>Výrobce čipu:</label><br />
+      <select name="vendor" id="vendorSelect" required>
+        <option value="" disabled>Vyberte výrobce</option>
+        <option value="Nvidia">Nvidia</option>
+        <option value="AMD">AMD</option>
+        <option value="Intel">Intel</option>
+      </select>
+    </div>
+    <div class="row">
+      <label>Paměť (GB):</label><br />
+      <input type="number" name="memory" min="1" value="{{memory}}" required />
+    </div>
+
+    <button type="submit">Uložit (PUT)</button>
+    <button type="reset" style="margin-left:.5rem;">Vymazat pole</button>
+    <a class="muted" href="/gpu/{{id}}">Zpět na detail</a>
+    <p class="muted" id="editMsg"></p>
+  </form>
+</div>

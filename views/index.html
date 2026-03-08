@@ -1,0 +1,45 @@
+<div class="card">
+  <h2>Přidat grafickou kartu</h2>
+  <form id="gpuCreateForm">
+    <div class="row">
+      <label>Výrobce čipu:</label><br />
+      <select name="vendor" required>
+        <option value="" disabled selected>Vyberte výrobce</option>
+        <option value="Nvidia">Nvidia</option>
+        <option value="AMD">AMD</option>
+        <option value="Intel">Intel</option>
+      </select>
+    </div>
+    <div class="row">
+      <label>Značka:</label><br />
+      <input name="brand" required />
+    </div>
+    <div class="row">
+      <label>Model:</label><br />
+      <input name="model" required />
+    </div>
+    <div class="row">
+      <label>Paměť (GB):</label><br />
+      <input type="number" name="memory" min="1" required />
+    </div>
+    <button type="submit">Přidat</button>
+    <p class="muted" id="gpuCreateMsg"></p>
+  </form>
+</div>
+
+<div class="card">
+  <h2>Seznam grafických karet</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>Výrobce čipu</th><th>Značka</th><th>Model</th><th>Paměť</th><th>Akce</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{rows}}
+    </tbody>
+  </table>
+
+  <p class="muted">Tip: smazání přes DELETE, editace přes PUT (fetch v JS). V poli <em>značka</em> zadejte výrobní značku karty. Stiskněte tlačítko <strong>Reset</strong> v horním panelu pro obnovení stránky a vymazání všech dat.</p>
+</div>
