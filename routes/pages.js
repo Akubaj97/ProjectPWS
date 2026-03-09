@@ -49,11 +49,23 @@ if (req.url === "/" && req.method === "GET") {
   const rows = gpus.map(g => {
     const brand = (g.brand || "").toLowerCase();
     const cls = brand === "nvidia" ? "nvidia" : brand === "amd" ? "amd" : brand === "intel" ? "intel" : "";
+    let brandHtml = g.brand || "";
+    switch (brand.toLowerCase()) {
+      case "nvidia":
+        brandHtml = `<span style=\"color:#76B900;\">${g.brand}</span>`;
+        break;
+      case "amd":
+        brandHtml = `<span style=\"color:#ED1C24;\">${g.brand}</span>`;
+        break;
+      case "intel":
+        brandHtml = `<span style=\"color:#0071C5;\">${g.brand}</span>`;
+        break;
+    }
     return `
     <tr class="${cls}">
       <td>${g.id}</td>
       <td>${g.vendor}</td>
-      <td>${g.brand || ""}</td>
+      <td>${brandHtml}</td>
       <td><a href="/gpu/${g.id}">${g.model}</a></td>
       <td>${g.memory}</td>
       <td>

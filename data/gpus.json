@@ -1,22 +1,8 @@
 [
   {
-    "brand": "asus",
     "id": 1,
     "model": "4080",
-    "vendor": "Nvidia",
-    "memory": 4
-  },
-  {
-    "brand": "asus",
-    "id": 2,
-    "model": "4080",
-    "vendor": "AMD",
-    "memory": 3
-  },
-  {
-    "id": 3,
-    "model": "4080",
-    "vendor": "AMD",
+    "vendor": "Intel",
     "memory": 4,
     "brand": "asus"
   }
