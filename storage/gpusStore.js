@@ -29,10 +29,11 @@ function getById(id) {
   return gpus.find((g) => g.id === id) || null;
 }
 
-function create({ model, vendor, memory, brand }) {
+function create({ model, vendor, memory, brand, price }) {
   const gpus = loadGpus();
   const newId = gpus.length ? Math.max(...gpus.map((g) => g.id)) + 1 : 1;
   const gpu = { id: newId, model, vendor, memory, brand };
+  if (price !== undefined) gpu.price = price;
   gpus.push(gpu);
   saveGpus(gpus);
   return gpu;
@@ -47,6 +48,7 @@ function update(id, patch) {
   if (patch.vendor !== undefined) gpus[idx].vendor = patch.vendor;
   if (patch.memory !== undefined) gpus[idx].memory = patch.memory;
   if (patch.brand !== undefined) gpus[idx].brand = patch.brand;
+  if (patch.price !== undefined) gpus[idx].price = patch.price;
 
   saveGpus(gpus);
   return gpus[idx];

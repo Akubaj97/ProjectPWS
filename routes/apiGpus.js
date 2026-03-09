@@ -38,7 +38,8 @@ function handleApiGpus(req, res) {
         return sendJson(res, 400, { error: "Chybí model, vendor, brand nebo memory" });
       }
 
-      const created = store.create({ model, vendor, brand, memory });
+      const price = data.price !== undefined ? Number(data.price) : undefined;
+      const created = store.create({ model, vendor, brand, memory, price });
       return sendJson(res, 201, created);
     });
   }
@@ -57,6 +58,7 @@ function handleApiGpus(req, res) {
       if (data.brand !== undefined) patch.brand = String(data.brand).trim();
       if (data.memory !== undefined) patch.memory = Number(data.memory);
 
+      if (data.price !== undefined) patch.price = Number(data.price);
       const updated = store.update(id, patch);
       if (!updated) return sendJson(res, 404, { error: "GPU nenalezena" });
 

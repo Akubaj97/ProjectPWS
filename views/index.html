@@ -22,8 +22,13 @@
       <label>Paměť (GB):</label><br />
       <input type="number" name="memory" min="1" required />
     </div>
+    <div class="row">
+      <label>Cena (Kč):</label><br />
+      <input type="number" name="price" min="0" />
+    </div>
     <button type="submit">Přidat</button>
     <p class="muted" id="gpuCreateMsg"></p>
+
   </form>
 </div>
 
@@ -33,13 +38,41 @@
   <table>
     <thead>
       <tr>
-        <th>ID</th><th>Výrobce čipu</th><th>Značka</th><th>Model</th><th>Paměť</th><th>Akce</th>
+        <th style="text-align:center;">ID
+          <button id="sortIdBtn" style="background:none;border:none;padding:0;margin-left:.3rem;font-size:1.1em;cursor:pointer;color:#fff;vertical-align:middle;">↕</button>
+        </th>
+        <th style="text-align:center;">Výrobce čipu
+          <button id="sortVendorBtn" style="background:none;border:none;padding:0;margin-left:.3rem;font-size:1.1em;cursor:pointer;color:#fff;vertical-align:middle;">↕</button>
+        </th>
+        <th style="text-align:center;">Značka
+          <button id="sortBrandBtn" style="background:none;border:none;padding:0;margin-left:.3rem;font-size:1.1em;cursor:pointer;color:#fff;vertical-align:middle;">↕</button>
+        </th>
+        <th style="text-align:center;">Model
+          <button id="sortModelBtn" style="background:none;border:none;padding:0;margin-left:.3rem;font-size:1.1em;cursor:pointer;color:#fff;vertical-align:middle;">↕</button>
+        </th>
+        <th style="text-align:center;">Paměť
+          <button id="sortMemoryBtn" style="background:none;border:none;padding:0;margin-left:.3rem;font-size:1.1em;cursor:pointer;color:#fff;vertical-align:middle;">↕</button>
+        </th>
+        <th style="text-align:center;">Cena (Kč)
+          <button id="sortPriceBtn" style="background:none;border:none;padding:0;margin-left:.3rem;font-size:1.1em;cursor:pointer;color:#fff;vertical-align:middle;">↕</button>
+        </th>
+        <th style="text-align:center;">Akce</th>
       </tr>
     </thead>
     <tbody>
       {{rows}}
     </tbody>
   </table>
-
-  <p class="muted">Tip: smazání přes DELETE, editace přes PUT (fetch v JS). V poli <em>značka</em> zadejte výrobní značku karty. Stiskněte tlačítko <strong>Reset</strong> v horním panelu pro obnovení stránky a vymazání všech dat.</p>
+  <p class="muted">Tip: smazání přes DELETE. V poli <em>značka</em> zadejte výrobní značku karty. Stiskněte tlačítko <strong>Reset</strong> v horním panelu pro obnovení stránky a vymazání všech dat.</p>
 </div>
+
+
+<div class="card">
+  <h2>Nejlepší cena/výkon</h2>
+  {{bestCardTable}}
+  <p class="muted">Tato tabulka zobrazuje grafickou kartu s nejlepším poměrem ceny a výkonu (nejnižší cena za jednotku výkonu).</p>
+</div>
+
+</div>
+
+

@@ -1,5 +1,55 @@
+/* sjednocení vzhledu tlačítek Detail, Upravit, Smazat */
+.btn-reset, .btn-reset:visited {
+  display: inline-block;
+  background: #000;
+  color: #fff !important;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: .6rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  font: inherit;
+}
+
+.btn-reset:hover, .btn-reset:focus {
+  background: #222;
+  color: #fff !important;
+}
+button {
+  padding: .6rem 1rem;
+  cursor: pointer;
+  background: #000;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+
+button:hover, button:focus {
+  background: #222;
+  color: #fff;
+}
+input, select, textarea {
+  padding: .45rem;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  height: 2.5rem;
+  background: #000;
+  color: #fff;
+  border: 1px solid #444;
+  transition: background 0.2s, color 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  background: #222;
+  color: #fff;
+  outline: none;
+}
 /* global styles including gradient and font */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
 
 html, body {
   height: 100%;
@@ -9,10 +59,19 @@ html, body {
 body {
   background: linear-gradient(135deg, #000000 0%, #390557 100%);
   color: #fff;
-  font-family: 'Roboto', system-ui, sans-serif;
+  font-family: 'Orbitron', Arial, sans-serif;
   max-width: 900px;
   margin: 2rem auto;
   padding: 0 1rem;
 }
 
 /* additional styles may remain in layout.html */
+
+th, td {
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}

@@ -44,13 +44,21 @@ function handlePages(req, res) {
 
   // GET /
 if (req.url === "/" && req.method === "GET") {
-  const gpus = store.getAll();
+  let gpus = store.getAll();
+  // Seřadit podle paměti a výrobce abecedně
+  gpus = gpus.sort((a, b) => {
+    // Nejprve paměť (vzestupně)
+    if (a.memory !== b.memory) return a.memory - b.memory;
+    // Poté výrobce abecedně (case-insensitive)
+    return (a.vendor || "").localeCompare(b.vendor || "", undefined, { sensitivity: 'base' });
+  });
 
   const rows = gpus.map(g => {
     const brand = (g.brand || "").toLowerCase();
-    const cls = brand === "nvidia" ? "nvidia" : brand === "amd" ? "amd" : brand === "intel" ? "intel" : "";
+    const normBrand = (g.brand || "").toLowerCase().replace(/\s+/g, "");
+    const cls = normBrand === "nvidia" ? "nvidia" : normBrand === "amd" ? "amd" : normBrand === "intel" ? "intel" : "";
     let brandHtml = g.brand || "";
-    switch (brand.toLowerCase()) {
+    switch (normBrand) {
       case "nvidia":
         brandHtml = `<span style=\"color:#76B900;\">${g.brand}</span>`;
         break;
@@ -63,23 +71,70 @@ if (req.url === "/" && req.method === "GET") {
     }
     return `
     <tr class="${cls}">
-      <td>${g.id}</td>
-      <td>${g.vendor}</td>
-      <td>${brandHtml}</td>
-      <td><a href="/gpu/${g.id}">${g.model}</a></td>
-      <td>${g.memory}</td>
-      <td>
-        <a href="/gpu/${g.id}">Detail</a>
-        <a href="/edit/${g.id}">Upravit</a>
-        <button data-delete-id="${g.id}">Smazat</button>
+      <td style="text-align:center;">${g.id}</td>
+      <td style="text-align:center;">${g.vendor}</td>
+      <td style="text-align:center;">${brandHtml}</td>
+      <td style="text-align:center;"><a href="/gpu/${g.id}">${g.model}</a></td>
+      <td style="text-align:center;">${g.memory} GB</td>
+      <td style="text-align:center;">${g.price !== undefined ? g.price + ' Kč' : ''}</td>
+      <td style="text-align:center;width:270px;">
+        <a href="/gpu/${g.id}" class="btn-reset">Detail</a>
+        <a href="/edit/${g.id}" class="btn-reset">Upravit</a>
+        <button data-delete-id="${g.id}" class="btn-reset">Smazat</button>
       </td>
     </tr>
   `;
   }).join("");
 
+
+  // Najít kartu s nejnižší cenou a nejvyšší pamětí
+  let bestCard = null;
+  if (gpus.length) {
+    // Filtruj jen ty, které mají cenu i paměť
+    const valid = gpus.filter(g => typeof g.price === 'number' && typeof g.memory === 'number');
+    if (valid.length) {
+      // Najdi nejvyšší paměť
+      const maxMemory = Math.max(...valid.map(g => g.memory));
+      // Z těch s max pamětí najdi nejnižší cenu
+      const best = valid.filter(g => g.memory === maxMemory);
+      bestCard = best.reduce((min, g) => (g.price < min.price ? g : min), best[0]);
+    }
+  }
+
+  let bestCardTable = '';
+  if (bestCard) {
+      bestCardTable = `
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align:center;">ID</th>
+              <th style="text-align:center;">Výrobce čipu</th>
+              <th style="text-align:center;">Značka</th>
+              <th style="text-align:center;">Model</th>
+              <th style="text-align:center;">Paměť</th>
+              <th style="text-align:center;">Cena (Kč)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align:center;">${bestCard.id}</td>
+              <td style="text-align:center;">${bestCard.vendor}</td>
+              <td style="text-align:center;">${bestCard.brand}</td>
+              <td style="text-align:center;">${bestCard.model}</td>
+              <td style="text-align:center;">${bestCard.memory} GB</td>
+              <td style="text-align:center;">${bestCard.price} Kč</td>
+            </tr>
+          </tbody>
+        </table>
+      `;
+  } else {
+    bestCardTable = '<p class="muted">Nebyly nalezeny žádné karty s cenou a pamětí.</p>';
+  }
+
   const indexTpl = loadView("index.html");
   const content = render(indexTpl, {
-    rows: rows || `<tr><td colspan="6">Žádná data.</td></tr>`
+    rows: rows || `<tr><td colspan="6">Žádná data.</td></tr>`,
+    bestCardTable
   });
 
   return sendHtml(

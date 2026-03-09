@@ -1,5 +1,5 @@
 /* global styles including gradient and font */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
 
 html, body {
   height: 100%;
@@ -8,7 +8,7 @@ html, body {
 }
 body {
   background: linear-gradient(135deg, #000000 0%, #390557 100%);
-  font-family: 'Roboto', system-ui, sans-serif;
+  font-family: 'Orbitron', Arial, sans-serif;
   max-width: 900px;
   margin: 2rem auto;
   padding: 0 1rem;

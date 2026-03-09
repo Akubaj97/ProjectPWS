@@ -4,7 +4,7 @@
   <form id="editForm" data-id="{{id}}">
     <div class="row">
       <label>Výrobce čipu:</label><br />
-      <select name="vendor" id="vendorSelect" required>
+      <select name="vendor" id="vendorSelect" required style="background:#000;color:#fff;">
         <option value="" disabled>Vyberte výrobce</option>
         <option value="Nvidia" style="color:#76B900;">Nvidia</option>
         <option value="AMD" style="color:#ED1C24;">AMD</option>
@@ -13,11 +13,11 @@
     </div>
     <div class="row">
       <label>Značka:</label><br />
-      <input name="brand" id="brandInput" value="{{brand}}" required />
+      <input name="brand" id="brandInput" value="{{brand}}" required style="background:#000;color:#fff;" />
     </div>
     <div class="row">
       <label>Model:</label><br />
-      <input name="model" value="{{model}}" required />
+      <input name="model" value="{{model}}" required style="background:#000;color:#fff;" />
     </div>
     <script>
       // after the select is rendered set current value
@@ -39,12 +39,16 @@
     </div>
     <div class="row">
       <label>Paměť (GB):</label><br />
-      <input type="number" name="memory" min="1" value="{{memory}}" required />
+      <input type="number" name="memory" min="1" value="{{memory}}" required style="background:#000;color:#fff;" />
+    </div>
+    <div class="row">
+      <label>Cena (Kč):</label><br />
+      <input type="number" name="price" min="0" value="{{price}}" style="background:#000;color:#fff;" />
     </div>
 
-    <button type="submit">Uložit (PUT)</button>
+    <button type="submit">Uložit</button>
     <button type="reset" style="margin-left:.5rem;">Vymazat pole</button>
-    <a class="muted" href="/gpu/{{id}}">Zpět na detail</a>
+      <a class="btn-reset" style="margin-left:.5rem;height:1.75rem;line-height:1.75rem;padding:.225rem .6rem;display:inline-block;vertical-align:middle;font-size:0.92em;" href="/gpu/{{id}}">Zpět na detail</a>
     <p class="muted" id="editMsg"></p>
   </form>
 </div>

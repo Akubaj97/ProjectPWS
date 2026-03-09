@@ -26,12 +26,15 @@
   <div class="topbar">
     <h1 style="margin:0">{{heading}}</h1>
     <div>
-      <a href="/">Domů</a>
-      <button id="resetBtn" style="margin-left:.8rem;padding:.4rem .7rem;">Reset</button>
+      <a href="/" class="btn-reset" style="margin-right:.3rem;">Domů</a>
+      <button id="resetBtn" class="btn-reset">Reset</button>
     </div>
   </div>
 
   {{content}}
+  <div style="text-align:center; color:#aaa; margin-top:2rem; font-size:.98rem; min-height:2.5em; padding:1em 0;">
+    &copy; Jakub Mlčoch – všechna práva vyhrazena.
+  </div>
 
   <script src="/public/app.js"></script>
 </body>

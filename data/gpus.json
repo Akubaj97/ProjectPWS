@@ -1,9 +1,18 @@
 [
   {
+    "brand": "msi",
     "id": 1,
     "model": "4080",
-    "vendor": "Intel",
+    "vendor": "Nvidia",
     "memory": 4,
-    "brand": "asus"
+    "price": 4
+  },
+  {
+    "brand": "asus",
+    "id": 2,
+    "model": "5070",
+    "vendor": "AMD",
+    "memory": 6,
+    "price": 33
   }
 ]
